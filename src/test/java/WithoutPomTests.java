@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 
-public class TestsWithoutPom {
+public class WithoutPomTests {
 
     RemoteWebDriver driver = new ChromeDriver();
 
