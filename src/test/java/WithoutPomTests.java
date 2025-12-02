@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.time.Duration;
 
@@ -16,7 +17,7 @@ public class WithoutPomTests {
 
 
     @Test
-    public void Basic1(){
+    public void Task1(){
         RemoteWebDriver driver = new ChromeDriver();
         driver.get("https://duckduckgo.com/");
         String pageTitle= driver.getTitle();
@@ -27,7 +28,7 @@ public class WithoutPomTests {
 
 
     @Test
-    public void Basic2(){
+    public void Task2(){
         RemoteWebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
         driver.get("https://duckduckgo.com/");
@@ -41,8 +42,9 @@ public class WithoutPomTests {
     }
 
     @Test
-    public void Basic3(){
+    public void Task3(){
         RemoteWebDriver driver = new ChromeDriver();
+        // set implicit wait to 1000 ms (1 second) for element searches
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
         driver.get("https://duckduckgo.com/");
         WebElement SearchBox = driver.findElement(By.id("searchbox_input"));
@@ -57,7 +59,7 @@ public class WithoutPomTests {
     }
 
     @Test
-    public void Basic4()
+    public void Task4()
     {
         RemoteWebDriver driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
@@ -82,7 +84,7 @@ public class WithoutPomTests {
     }
 
     @Test
-    public void Basic5()
+    public void Task5()
     {
 
         RemoteWebDriver driver = new ChromeDriver();
@@ -109,6 +111,44 @@ public class WithoutPomTests {
         Assert.assertTrue(SecondResURL.contains("https://www.linkedin.com"));
         driver.quit();
     }
-    
 
+    @Test
+    public void Task6()
+    {
+
+        RemoteWebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
+
+        driver.get("https://the-internet.herokuapp.com/checkboxes");
+
+        WebElement checkBox1 = driver.findElement(By.xpath("//input[@type='checkbox'][1]"));
+        checkBox1.click();
+        boolean checkBox1Selected = checkBox1.isSelected();
+        Assert.assertTrue(checkBox1Selected);
+        driver.quit();
+    }
+
+    @Test
+    public void Task7()
+    {
+
+        SoftAssert softAssert = new SoftAssert();
+        RemoteWebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
+
+        driver.get("https://www.w3schools.com/html/html_tables.asp");
+
+        WebElement Company = driver.findElement(By.xpath("//table[@id=\"customers\"]/tbody/tr[4]/td[1]"));
+        WebElement Country = driver.findElement(By.xpath("//table[@id=\"customers\"]/tbody/tr[4]/td[3]"));
+
+        String company_text=Company.getText();
+        String country_text =Country.getText();
+
+        softAssert.assertEquals(company_text,"Ernst Handel");
+        softAssert.assertEquals(country_text,"Austria");
+
+        // must be called to throw collected assertion failures and mark the test failed
+        softAssert.assertAll();
+        driver.quit();
+    }
 }
