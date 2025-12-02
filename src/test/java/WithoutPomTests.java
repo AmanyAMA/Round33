@@ -2,6 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -170,6 +171,27 @@ public class WithoutPomTests {
         // must be called to throw collected assertion failures and mark the test failed
         softAssert.assertAll();
         driver.quit();
+    }
+
+    @Test
+    public void Task9() {
+        SoftAssert softAssert = new SoftAssert();
+        RemoteWebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        driver.get("https://jqueryui.com/resources/demos/droppable/default.html");
+
+        WebElement draggable = driver.findElement(By.id("draggable"));
+        WebElement droppable = driver.findElement(By.id("droppable"));
+
+        new Actions(driver)
+                .dragAndDrop(draggable, droppable)
+                .perform();
+
+        Assert.assertEquals("Dropped!", driver.findElement(By.xpath("//div[@id='droppable']/p")).getText());
+        driver.quit();
+
+
     }
 
 }
