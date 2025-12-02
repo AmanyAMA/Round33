@@ -14,10 +14,10 @@ import java.time.Duration;
 
 public class WithoutPomTests {
 
-    RemoteWebDriver driver = new ChromeDriver();
 
     @Test
     public void Basic1(){
+        RemoteWebDriver driver = new ChromeDriver();
         driver.get("https://duckduckgo.com/");
         String pageTitle= driver.getTitle();
         System.out.println(pageTitle);
@@ -28,6 +28,7 @@ public class WithoutPomTests {
 
     @Test
     public void Basic2(){
+        RemoteWebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
         driver.get("https://duckduckgo.com/");
         WebElement isImageVisible = driver.findElement
@@ -41,6 +42,7 @@ public class WithoutPomTests {
 
     @Test
     public void Basic3(){
+        RemoteWebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
         driver.get("https://duckduckgo.com/");
         WebElement SearchBox = driver.findElement(By.id("searchbox_input"));
@@ -64,10 +66,13 @@ public class WithoutPomTests {
         SearchBox.sendKeys("TestNG");
         WebElement SearchButton = driver.findElement(By.xpath("//button[@aria-label=\"Search\"]"));
         SearchButton.click();
-        WebElement FourthResult = driver.findElement(By.xpath("//article[@id='r1-3']/div[3]/h2"));
+
+        WebElement FourthResult = driver.findElement(By.xpath("//article[@id='r1-3']/div[3]/h2/a"));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(FourthResult));
         FourthResult.click();
         String FourthResultBrowserTitle =driver.getTitle();
-        Assert.assertEquals(FourthResultBrowserTitle,"");
+        Assert.assertEquals(FourthResultBrowserTitle,"TestNG Tutorial");
         driver.quit();
     }
     
