@@ -10,6 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.io.File;
 import java.time.Duration;
 
 
@@ -156,12 +157,12 @@ public class WithoutPomTests {
         driver.get("https://the-internet.herokuapp.com/upload");
 
         WebElement Uploadfile = driver.findElement(By.id("file-upload"));
-        String filePath = java.nio.file.Paths.get(
-                System.getProperty("user.dir"),
-                "src", "test", "resources", "tinyImage.png").toAbsolutePath().toString();
-        Uploadfile.sendKeys(filePath);
+        File uploadFile = new File("src/test/resources/tinyImage.png");
+        Uploadfile.sendKeys(uploadFile.getAbsolutePath());
+
         WebElement SubmitFile = driver.findElement(By.id("file-submit"));
         SubmitFile.click();
+
         WebElement SuccessMsg = driver.findElement(By.tagName("h3"));
         WebElement UploadedFilename = driver.findElement(By.id("uploaded-files"));
         String SuessMsgTxt = SuccessMsg.getText();
@@ -175,7 +176,6 @@ public class WithoutPomTests {
 
     @Test
     public void Task9() {
-        SoftAssert softAssert = new SoftAssert();
         RemoteWebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
@@ -188,7 +188,7 @@ public class WithoutPomTests {
                 .dragAndDrop(draggable, droppable)
                 .perform();
 
-        Assert.assertEquals("Dropped!", driver.findElement(By.xpath("//div[@id='droppable']/p")).getText());
+        Assert.assertEquals(driver.findElement(By.xpath("//div[@id='droppable']/p")).getText(),"Dropped!");
         driver.quit();
 
 
