@@ -67,12 +67,46 @@ public class WithoutPomTests {
         WebElement SearchButton = driver.findElement(By.xpath("//button[@aria-label=\"Search\"]"));
         SearchButton.click();
 
-        WebElement FourthResult = driver.findElement(By.xpath("//article[@id='r1-3']/div[3]/h2/a"));
+        WebElement FourthResult = driver.findElement(By.xpath("//article[@id='r1-3']/div[3]/h2/a/span"));
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(FourthResult));
-        FourthResult.click();
-        String FourthResultBrowserTitle =driver.getTitle();
+
+        //solution using getAttribute
+        String FourthResultBrowserTitle =FourthResult.getText();
+
+        //solution using getTitle
+        /*FourthResult.click();
+        String FourthResultBrowserTitle =driver.getTitle();*/
         Assert.assertEquals(FourthResultBrowserTitle,"TestNG Tutorial");
+        driver.quit();
+    }
+
+    @Test
+    public void Basic5()
+    {
+
+        RemoteWebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
+        driver.get("https://duckduckgo.com/");
+        WebElement SearchBox = driver.findElement(By.id("searchbox_input"));
+        SearchBox.sendKeys("Cucumber IO");
+        WebElement SearchButton = driver.findElement(By.xpath("//button[@aria-label=\"Search\"]"));
+        SearchButton.click();
+
+        WebElement SecondResult = driver.findElement(By.xpath("//article[@id='r1-1']/div[3]/h2/a"));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(SecondResult));
+
+        //solution using getAttribute
+        String SecondResURL =SecondResult.getAttribute("href");
+
+        //solution using getTitle
+        /*SecondResult.click();
+        String SecondResURL =driver.getTitle();*/
+
+        //validation
+        Assert.assertNotNull(SecondResURL);
+        Assert.assertTrue(SecondResURL.contains("https://www.linkedin.com"));
         driver.quit();
     }
     
