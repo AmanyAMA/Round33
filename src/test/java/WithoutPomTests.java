@@ -130,7 +130,7 @@ public class WithoutPomTests {
 
         SoftAssert softAssert = new SoftAssert();
         RemoteWebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
+       // driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
 
         driver.get("https://www.w3schools.com/html/html_tables.asp");
 
