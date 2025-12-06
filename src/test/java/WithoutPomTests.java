@@ -18,7 +18,7 @@ public class WithoutPomTests {
 
 
     @Test
-    public void Task1() {
+    public void task1() {
         RemoteWebDriver driver = new ChromeDriver();
         driver.get("https://duckduckgo.com/");
         String pageTitle = driver.getTitle();
@@ -29,7 +29,7 @@ public class WithoutPomTests {
 
 
     @Test
-    public void Task2() {
+    public void task2() {
         RemoteWebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
         driver.get("https://duckduckgo.com/");
@@ -42,7 +42,7 @@ public class WithoutPomTests {
     }
 
     @Test
-    public void Task3() {
+    public void task3() {
         RemoteWebDriver driver = new ChromeDriver();
         // set implicit wait to 1000 ms (1 second) for element searches
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
@@ -59,7 +59,7 @@ public class WithoutPomTests {
     }
 
     @Test
-    public void Task4() {
+    public void task4() {
         RemoteWebDriver driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
         driver.get("https://duckduckgo.com/");
@@ -83,7 +83,7 @@ public class WithoutPomTests {
     }
 
     @Test
-    public void Task5() {
+    public void task5() {
 
         RemoteWebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
@@ -111,7 +111,7 @@ public class WithoutPomTests {
     }
 
     @Test
-    public void Task6() {
+    public void task6() {
 
         RemoteWebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
@@ -126,7 +126,7 @@ public class WithoutPomTests {
     }
 
     @Test
-    public void Task7() {
+    public void task7() {
 
         SoftAssert softAssert = new SoftAssert();
         RemoteWebDriver driver = new ChromeDriver();
@@ -149,7 +149,7 @@ public class WithoutPomTests {
     }
 
     @Test
-    public void Task8() {
+    public void task8() {
         SoftAssert softAssert = new SoftAssert();
         RemoteWebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -167,6 +167,8 @@ public class WithoutPomTests {
         WebElement UploadedFilename = driver.findElement(By.id("uploaded-files"));
         String SuessMsgTxt = SuccessMsg.getText();
         String UploadedFileTxt =UploadedFilename.getText();
+
+
         softAssert.assertEquals(SuessMsgTxt, "File Uploaded!");
         softAssert.assertEquals(UploadedFileTxt, "tinyImage.png");
         // must be called to throw collected assertion failures and mark the test failed
@@ -175,7 +177,7 @@ public class WithoutPomTests {
     }
 
     @Test
-    public void Task9() {
+    public void task9() {
         RemoteWebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
